@@ -1,0 +1,195 @@
+@font-face {
+  font-family: DotGothic16;
+  src: url(DotGothic16-Regular.ttf);
+}
+
+:root {
+  --gray0: #333;
+  --gray1: #777;
+  --gray2: #AAA;
+  --gray3: #BBB;
+  --gray4: #CCC;
+  --gray5: #EEE;
+  --tile-size: clamp(10px, calc(100vw / 8 - 25px), 50px);
+  --board-size: calc(100vw - 200px);
+}
+
+* {
+  font-family: DotGothic16, monospace;
+  letter-spacing: 3px;
+  user-select: none;
+}
+
+html {
+  background-color: var(--gray1);
+}
+
+body {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  gap: 20px;
+  align-items: center;
+  justify-content: stretch;
+  background-color: var(--gray1);
+}
+
+#tabs {
+  flex-shrink: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 15px;
+  min-width: 200px;
+  height: 7vw;
+}
+
+#tabs > button {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: stretch;
+  margin-top: -5px;
+  gap: 10px;
+  border: 5px solid var(--gray3);
+  background-color: var(--gray3);
+  font-size: 120%;
+  transition: all 0.1s ease-in-out;
+}
+
+#tabs > button:hover {
+  border-color: var(--gray5);
+}
+
+#tabs > button > span {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#tabs > button > span#level {
+  justify-content: flex-end;
+  color: var(--gray0);
+}
+
+#tabs > button > span#real {
+  justify-content: flex-start;
+  color: var(--gray1);
+  font-size: 80%;
+}
+
+#boards {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: scroll;
+  padding: 15px;
+  gap: 15px;
+  align-items: stretch;
+  justify-content: stretch;
+  background-color: var(--gray2);
+}
+
+.board {
+  flex-shrink: 1;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  display: grid;
+  padding: 10px;
+  gap: 8px;
+  background-color: var(--gray4);
+}
+
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border: 2px solid var(--gray1);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray4);
+  color: var(--gray0);
+  font-size: calc(var(--tile-size) * 0.75);
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+}
+
+.tile:hover {
+  background-color: var(--gray5);
+  transform: scale(1.15);
+}
+
+#start {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--gray0);
+  color: var(--gray5);
+  transition: all 1s cubic-bezier(0.5, 0.1, 0.9, 0.2);
+}
+
+#start.overlay-hidden {
+  display: none;
+}
+
+#start > h1 {
+  margin: 0px;
+  animation-name: flicker;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    transform: scale(0.98);
+  }
+  91% {
+    transform: none;
+  }
+  99% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#start > button {
+  width: 200px;
+  font-size: 110%;
+  padding: 15px;
+  border: 1px solid var(--gray1);
+  background-color: var(--gray1);
+  color: var(--gray5);
+  transition: all 0.2s ease-in-out;
+}
+
+#start > button:hover {
+  color: var(--gray2);
+  transform: scale(1.02);
+}
+
+#start > button:active {
+  background-color: var(--gray0);
+}
