@@ -26,7 +26,7 @@ function onSetupFileLoad() {
     Board.numBoards = 0;
 
     $("#btn-play-pause").children().addClass("hidden");
-    $(json.running ? "#pause" : "#play").removeClass("hidden");
+    $(json.running ? "span#pause" : "span#play").removeClass("hidden");
 
     constructObjectsFromJSON(json);
   }
@@ -76,7 +76,7 @@ function setupFinish(boards) {
 }
 
 function playPause() {
-  if ($("#play").hasClass("hidden")) {
+  if ($("span#play").hasClass("hidden")) {
     game.pause();
   }
   else {
