@@ -26,10 +26,8 @@ class Game {
     this.running = false;
   }
 
-  start(boards) {
+  init(boards) {
     this.boards = boards;
-    this.running = true;
-
     this.bindTileClickHandlers();
 
     window.setInterval(this.updateShopButton.bind(this), 1000);

@@ -5,7 +5,7 @@ class Board {
     this.board = Board.numBoards++;
     this.width = width;
     $("#board").useTemplate();
-    this.elem = $("#boards").children(":not(template)").last();
+    this.elem = $("#boards").children(".board").last();
     this.tiles = {}; // { pos number: tile Tile }
   }
 
