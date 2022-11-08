@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Exponential</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="jquery-3.6.0.min.js"></script>
     <script src="util.js"></script>
     <script src="board.js"></script>
@@ -17,8 +18,17 @@
       <button id="btn-load">Load Save</button>
       <button id="btn-new">New Game</button>
     </div>
+    <div id="menu" class="hidden">
+      <h1>Menu</h1>
+      <button id="btn-menu-close">Close</button>
+      <button id="btn-menu-save">Download Save</button>
+    </div>
     <div id="tabs">
-      <!-- Button text is updated programmatically -->
+      <button id="btn-play-pause">
+        <span id="play" class="material-symbols-outlined hidden">play_circle</span>
+        <span id="pause" class="material-symbols-outlined">pause_circle</span>
+      </button>
+      <button id="btn-menu">Menu</button>
       <button id="btn-shop">
         <span id="level"></span>
         <span id="real"></span>

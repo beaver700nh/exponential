@@ -60,6 +60,13 @@ class Board {
       tile.update(this.board, this.width, pos.x, pos.y);
     }
   }
+
+  toJSON() {
+    return {
+      width: this.width,
+      tiles: this.tiles,
+    };
+  }
 }
 
 class Tile {
@@ -78,5 +85,12 @@ class Tile {
 
   update() {
     this.elem.html(this.level);
+  }
+
+  toJSON() {
+    return {
+      level: this.level,
+      data: this.data,
+    };
   }
 }

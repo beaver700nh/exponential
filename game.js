@@ -18,6 +18,14 @@ class Game {
     };
   }
 
+  play() {
+    this.running = true;
+  }
+
+  pause() {
+    this.running = false;
+  }
+
   start(boards) {
     this.boards = boards;
     this.running = true;
@@ -89,7 +97,7 @@ class Game {
       if (!tile) {
         board.setTileByIndex(idx, 0, {upgrades: {pick: 1}});
       }
-      else if (tile.level < 5) {
+      else if (tile.level < 3) {
         ++tile.level;
       }
 
@@ -97,8 +105,19 @@ class Game {
     }
   }
 
-  selectTile() {
-    
+  download() {
+    const out = {
+      tickTime: this.tickTime,
+      running: this.running,
+      boards: this.boards,
+      data: this.data,
+    };
+    console.log(out);
+
+    const blob = new Blob([JSON.stringify(out, null, "  ")]);
+    const time = getCurrentTimeISO8601();
+
+    downloadBlob(blob, `exponential-save-${time}.json`);
   }
 
   updateShopButton() {

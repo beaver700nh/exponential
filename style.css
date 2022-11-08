@@ -42,6 +42,10 @@ body {
   background-color: var(--gray1);
 }
 
+.hidden {
+  display: none !important;
+}
+
 #tabs {
   flex-shrink: 1;
   display: flex;
@@ -57,8 +61,6 @@ body {
   flex-grow: 1;
   display: flex;
   flex-flow: row nowrap;
-  align-items: baseline;
-  justify-content: stretch;
   margin-top: -5px;
   gap: 10px;
   border: 5px solid var(--gray3);
@@ -71,18 +73,33 @@ body {
   border-color: var(--gray5);
 }
 
-#tabs > button > span {
+#tabs > #btn-play-pause {
+  align-items: end;
+  justify-content: center;
+}
+
+#tabs > #btn-menu {
+  align-items: center;
+  justify-content: center;
+}
+
+#tabs > #btn-shop {
+  align-items: baseline;
+  justify-content: stretch;
+}
+
+#tabs > #btn-shop > span {
   flex-grow: 1;
   display: flex;
   flex-flow: row nowrap;
 }
 
-#tabs > button > span#level {
+#tabs > #btn-shop > span#level {
   justify-content: flex-end;
   color: var(--gray0);
 }
 
-#tabs > button > span#real {
+#tabs > #btn-shop > span#real {
   justify-content: flex-start;
   color: var(--gray1);
   font-size: 80%;
@@ -145,10 +162,6 @@ body {
   transition: all 1s cubic-bezier(0.5, 0.1, 0.9, 0.2);
 }
 
-#start.overlay-hidden {
-  display: none;
-}
-
 #start > h1 {
   margin: 0px;
   animation-name: flicker;
@@ -192,4 +205,46 @@ body {
 
 #start > button:active {
   background-color: var(--gray0);
+}
+
+#menu {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--gray0);
+  color: var(--gray5);
+}
+
+#menu > h1 {
+  margin: 0px;
+}
+
+#menu > button {
+  background-color: var(--gray0);
+  color: var(--gray5);
+  border: none;
+  font-size: 150%;
+  transition: all 0.1s ease-in-out;
+}
+
+#menu > button:hover {
+  transform: scale(1.05);
+  font-weight: bold;
+}
+
+#menu > button:hover::before {
+  content: ">";
+  margin-right: 10px;
+}
+
+#menu > button:hover::after {
+  content: "<";
+  margin-left: 10px;
 }

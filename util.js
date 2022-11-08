@@ -102,3 +102,35 @@ function objectValues(thing) {
 
   return values;
 }
+
+function downloadBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+
+  const link = $("<a />", {href: url, download: name});
+
+  link.appendTo("body");
+  link[0].dispatchEvent(
+    new MouseEvent(
+      "click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      }
+    )
+  );
+
+  window.setTimeout(
+    () => {
+      URL.revokeObjectURL(url);
+      link.remove();
+    }, 100
+  );
+}
+
+function getCurrentTimeISO8601() {
+  const date = new Date();
+  const offset = date.getTimezoneOffset() * 60000;
+  const shifted = new Date(date.getTime() - offset);
+
+  return shifted.toISOString().replace(/([-:]|\..*$)/g, "");
+}
