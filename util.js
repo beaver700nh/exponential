@@ -19,10 +19,18 @@ $.fn.onNClicks = function (...callbacks) {
           callbacks[info.repeats - 1]?.(event, clicked);
           info.repeats = 0;
         },
-        200, this
+        TIME_BETWEEN_DOUBLE_CLICK, this
       );
     }
   );
+}
+
+$.fn.doErrorFlash = function (duration) {
+  const old = $(this).css("background-color");
+
+  $(this).css("background-color", "var(--error)");
+
+  window.setTimeout(() => $(this).css("background-color", old), duration);
 }
 
 class Vec2 {

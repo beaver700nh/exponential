@@ -30,7 +30,7 @@ class Game {
     this.boards = boards;
     this.bindTileClickHandlers();
 
-    window.setInterval(this.updateShopButton.bind(this), 1000);
+    window.setInterval(this.updateShopButton.bind(this), INTERVAL_LEVEL_COUNTER_UPDATE);
     window.setTimeout(this.clock.bind(this), this.tickTime);
   }
 
@@ -93,9 +93,9 @@ class Game {
       let tile = board.getTileByIndex(idx);
 
       if (!tile) {
-        board.setTileByIndex(idx, 0, {upgrades: {pick: 1}});
+        board.setTileByIndex(idx, 0, {upgrades: {pick: PROB_RANDTICK_TILE_RANDTICK_SPAWNED}});
       }
-      else if (tile.level < 3) {
+      else if (tile.level < MAX_LEVEL_RANDTICK) {
         ++tile.level;
       }
 

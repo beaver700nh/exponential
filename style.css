@@ -10,6 +10,7 @@
   --gray3: #BBB;
   --gray4: #CCC;
   --gray5: #EEE;
+  --error: #F64;
   --tile-size: clamp(10px, calc(100vw / 8 - 25px), 50px);
   --board-size: calc(100vw - 200px);
 }

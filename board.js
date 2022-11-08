@@ -14,7 +14,7 @@ class Board {
 
     for (let i = 0; i < Math.pow(this.width, 2); ++i) {
       let tile = this.getTileByIndex(i);
-      let weight = (tile ? tile.data.upgrades.pick : 0.1);
+      let weight = (tile ? tile.data.upgrades.pick : PROB_RANDTICK_TILE_EMPTY);
 
       probTab.push({weight: weight, item: i});
     }

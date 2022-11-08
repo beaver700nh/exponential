@@ -31,6 +31,11 @@ function onSetupFileLoad() {
     constructObjectsFromJSON(json);
   }
 
+  reader.onerror = function () {
+    $(this).doErrorFlash(ERR_FLASH_DUR);
+    console.log(reader.error);
+  }.bind(this);
+
   reader.readAsText(this.files[0]);
 }
 
