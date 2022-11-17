@@ -12,6 +12,7 @@
     <script src="board.js"></script>
     <script src="game.js"></script>
     <script src="script.js"></script>
+    <script src="hacker.js"></script>
   </head>
   <body>
     <div id="start">
@@ -24,6 +25,20 @@
       <button id="btn-menu-close">Close</button>
       <button id="btn-menu-save">Download Save</button>
     </div>
+    <div id="upgrade-tile" class="hidden">
+      <button id="btn-upgrade-close">Close</button>
+      <div id="upgrades">
+        <template id="upgrade">
+          <div class="upgrade">
+            <span class="material-symbols-outlined">payments</span>
+            <span class="upgrade-price">0</span>
+            <button class="upgrade-button">Nothing</button>
+            <span class="upgrade-id hidden">nothing</span>
+            <span class="upgrade-counter">0</span>
+          </div>
+        </template>
+      </div>
+    </div>
     <div id="tabs">
       <button id="btn-play-pause">
         <span id="play" class="material-symbols-outlined hidden">play_circle</span>
@@ -34,6 +49,13 @@
         <span id="level"></span>
         <span id="real"></span>
       </button>
+    </div>
+    <div id="highlighter" class="hidden">
+      <div class="highlighter"></div>
+      <div class="highlighter"></div>
+      <div class="highlighter"></div>
+      <div class="highlighter"></div>
+      <div class="highlighter inverse"></div>
     </div>
     <div id="boards">
       <template id="board">

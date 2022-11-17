@@ -30,7 +30,7 @@ class Game {
     this.boards = boards;
     this.bindTileClickHandlers();
 
-    window.setInterval(this.updateShopButton.bind(this), INTERVAL_LEVEL_COUNTER_UPDATE);
+    window.setInterval(this.updateShopButton.bind(this), INTERVAL_UPDATE_LEVEL_COUNTER);
     window.setTimeout(this.clock.bind(this), this.tickTime);
   }
 
@@ -40,6 +40,7 @@ class Game {
         $(board.elem.children(".tile")[index]).onNClicks(
           this.onTileSingleClick(board, index),
           this.onTileDoubleClick(board, index),
+          this.onTileTripleClick(board, index),
         );
       }
     }
@@ -71,6 +72,78 @@ class Game {
 
       board.removeTileByIndex(index);
     }.bind(this);
+  }
+
+  // Upgrade tile
+  onTileTripleClick(board, index) {
+    return function (event, elem) {
+      let tile = board.getTileByIndex(index);
+      if (!tile) return;
+
+      tile.elem.tileHalo(true);
+      $("#upgrade-tile").removeClass("hidden");
+
+      this.setUpUpgradeElements(tile, board, index);
+    }.bind(this);
+  }
+
+  setUpUpgradeElements(tile, board, index) {
+    $("#upgrades").children(".upgrade").remove();
+
+    for (const ug of tile.getUpgradeMap()) {
+      let created = $("#upgrade").useTemplate(ug);
+      this.checkTileUpgradePrice(created);
+    }
+
+    this.bindTileUpgradeBuyHandler(tile);
+
+    let elem = $("#upgrades").get(0);
+    let dev = (index % board.width < 4 ? 10 : -10 - elem.offsetWidth);
+    let x = 0.5 * window.innerWidth + dev;
+    let y = 0.5 * window.innerHeight - 0.5 * elem.offsetHeight;
+
+    $("#upgrades").css({top: y, left: x});
+  }
+
+  bindTileUpgradeBuyHandler(tile) {
+    $("#upgrades").find(".upgrade-button").click(
+      {game: this},
+      function () {
+        const container = $(this).parent();
+        game.doTileUpgradeBuyTransaction(container, tile);
+
+        const upgrades = tile.getUpgrades();
+        game.updateTileUpgradeInfo(upgrades);
+      }
+    );
+  }
+
+  doTileUpgradeBuyTransaction(container, tile) {
+    this.data.levels -= container.tileUpgradeGetData("price");
+    tile.doUpgrade(container.tileUpgradeGetData("id"));
+  }
+
+  updateTileUpgradeInfo(upgrades) {
+    $("#upgrades").each(
+      function (index) {
+        let elem = $(".upgrade").eq(index);
+        elem.tileUpgradeSetDatas(upgrades[index]);
+        this.checkTileUpgradePrice(elem);
+      }.bind(this)
+    );
+  }
+
+  checkTileUpgradePrice(elem) {
+    let button = elem.children("button");
+
+    if (this.data.levels < elem.tileUpgradeGetData("price")) {
+      elem.addClass("too-expensive");
+      button.prop("disabled", true);
+    }
+    else {
+      elem.removeClass("too-expensive");
+      button.prop("disabled", false);
+    }
   }
 
   clock() {

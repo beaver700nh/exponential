@@ -10,7 +10,7 @@
   --gray3: #BBB;
   --gray4: #CCC;
   --gray5: #EEE;
-  --error: #F64;
+  --error: #F54;
   --tile-size: clamp(10px, calc(100vw / 8 - 25px), 50px);
   --board-size: calc(100vw - 200px);
 }
@@ -26,7 +26,7 @@ html {
 }
 
 body {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -43,8 +43,21 @@ body {
   background-color: var(--gray1);
 }
 
+button {
+  color: inherit;
+  background-color: inherit;
+}
+
 .hidden {
   display: none !important;
+}
+
+.too-expensive, .too-expensive * {
+  cursor: url(too-expensive.png), not-allowed !important;
+}
+
+.no-scroll {
+  overflow: hidden !important;
 }
 
 #tabs {
@@ -148,7 +161,7 @@ body {
 }
 
 #start {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -209,7 +222,7 @@ body {
 }
 
 #menu {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -248,4 +261,115 @@ body {
 #menu > button:hover::after {
   content: "<";
   margin-left: 10px;
+}
+
+#upgrade-tile {
+  position: fixed;
+  z-index: 999;
+  background-color: var(--gray1);
+}
+
+#upgrade-tile > * {
+  position: fixed;
+}
+
+#upgrade-tile > #btn-upgrade-close {
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray5);
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 120%;
+  transition: all 0.1s ease-in-out;
+}
+
+#upgrade-tile > #btn-upgrade-close:hover {
+  font-weight: bold;
+  font-size: 130%;
+}
+
+#upgrades {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: start;
+  padding: 10px;
+  gap: 5px;
+  border: 2px solid var(--gray5);
+  background-color: var(--gray1);
+  max-height: calc(8 * var(--tile-size));
+  max-width: calc(5 * var(--tile-size));
+  overflow: scroll;
+}
+
+#upgrades > .upgrade {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+  color: var(--gray4);
+}
+
+#upgrades > .upgrade.too-expensive, #upgrades > .upgrade.too-expensive * {
+  color: var(--gray2) !important;
+}
+
+#upgrades > .upgrade > .material-symbols-outlined {
+  font-size: 120%;
+  align-self: end;
+}
+
+#upgrades > .upgrade > .upgrade-price {
+  margin-left: 5px;
+}
+
+#upgrades > .upgrade > .upgrade-counter::before {
+  content: "[x";
+}
+
+#upgrades > .upgrade > .upgrade-counter::after {
+  content: "]";
+}
+
+#upgrades > .upgrade > span {
+  color: var(--gray4);
+}
+
+#upgrades > .upgrade > .upgrade-button {
+  border: none;
+  font-size: 115%;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#upgrades > .upgrade > .upgrade-button:hover {
+  color: var(--gray5);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#upgrades > .upgrade > .upgrade-button:not(.too-expensive) {
+  text-decoration: none;
+}
+
+#highlighter {
+  position: fixed;
+  top: -1000;
+  left: -1000;
+  right: -100000;
+  bottom: -100000;
+}
+
+#highlighter > .highlighter {
+  position: fixed;
+  background-color: var(--gray0);
+  opacity: 0.75;
+}
+
+#highlighter > .highlighter.inverse {
+  opacity: 0;
 }

@@ -1,4 +1,4 @@
-var game = new Game(500);
+var game = new Game(INTERVAL_RANDTICK_INITIAL);
 
 function main() {
   $("#btn-load").click(setupFromFile);
@@ -10,6 +10,13 @@ function main() {
   $("#btn-menu-close").click(() => $("#menu").   addClass("hidden"));
 
   $("#btn-menu-save").click(game.download.bind(game));
+
+  $("#btn-upgrade-close").click(closeTileUpgradeMenu);
+}
+
+function closeTileUpgradeMenu() {
+  $("#upgrade-tile").addClass("hidden");
+  $("#highlighter").addClass("hidden");
 }
 
 function setupFromFile() {

@@ -4,7 +4,7 @@ class Board {
   constructor(width) {
     this.board = Board.numBoards++;
     this.width = width;
-    $("#board").useTemplate();
+    $("#board").useTemplate({});
     this.elem = $("#boards").children(".board").last();
     this.tiles = {}; // { pos number: tile Tile }
   }
@@ -70,10 +70,34 @@ class Board {
 }
 
 class Tile {
+  static UPGRADES = {
+    pick: {name: "Pick Chance", price: (n) => 8 * n},
+  };
+
   constructor(level, data, elem) {
     this.level = level;
     this.data = data;
     this.elem = elem;
+  }
+
+  getUpgrades() {
+    return Object.entries(this.data.upgrades).map(
+      ([k, v]) => {
+        const ug = Tile.UPGRADES[k];
+        return new UpgradeData(ug.price(v), ug.name, k, v).get();
+      }
+    );
+  }
+
+  getUpgradeMap() {
+    const ugs = this.getUpgrades();
+    return ugs.map(
+      (ug) => applyFnMap(ug, ([k, v]) => [`.upgrade-${k}`, v])
+    );
+  }
+
+  doUpgrade(id) {
+    ++this.data.upgrades[id];
   }
 
   copyFrom(other) {
