@@ -12,7 +12,7 @@ class Board {
   chooseRandomTile() {
     let probTab = [];
 
-    for (let i = 0; i < Math.pow(this.width, 2); ++i) {
+    for (let i = 0; i < this.width**2; ++i) {
       let tile = this.getTileByIndex(i);
       let weight = (tile ? tile.data.upgrades.pick : PROB_RANDTICK_TILE_EMPTY);
 
@@ -71,13 +71,23 @@ class Board {
 
 class Tile {
   static UPGRADES = {
-    pick: {name: "Pick Chance", price: (n) => 8 * n},
+    pick:  {name: "Pick Me", price: (n) => 2**3 * n, desc: "Tile is more likely to be random-ticked."},
+    dense: {name: "Dense",   price: (n) => 2**4 * n, desc: "Upgrade level...\n2: tile levels worth 2x\n4: tile levels worth 3x\n8: tile levels worth 4x\netc..."},
+  };
+
+  static UPGRADES_DEFAULT = {
+    pick:  0,
+    dense: 0,
   };
 
   constructor(level, data, elem) {
     this.level = level;
-    this.data = data;
     this.elem = elem;
+
+    this.data = {
+      upgrades: {...Tile.UPGRADES_DEFAULT}, ...data,
+    };
+    console.log(this.data);
   }
 
   getUpgrades() {

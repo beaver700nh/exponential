@@ -214,3 +214,11 @@ function getCurrentTimeISO8601() {
 
   return shifted.toISOString().replace(/([-:]|\..*$)/g, "");
 }
+
+function toBinary(num) {
+  return (this.data.levels >>> 0).toString(2);
+}
+
+function betterLog2(num) {
+  return toBinary(num).length;
+}

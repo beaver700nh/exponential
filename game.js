@@ -36,7 +36,7 @@ class Game {
 
   bindTileClickHandlers() {
     for (const board of this.boards) {
-      for (let index = 0; index < Math.pow(board.width, 2); ++index) {
+      for (let index = 0; index < board.width**2; ++index) {
         $(board.elem.children(".tile")[index]).onNClicks(
           this.onTileSingleClick(board, index),
           this.onTileDoubleClick(board, index),
@@ -46,7 +46,10 @@ class Game {
     }
   }
 
-  // Sell tile levels
+  ////////////////////////
+  /// Sell tile levels ///
+  ////////////////////////
+
   onTileSingleClick(board, index) {
     return function (event, elem) {
       let tile = board.getTileByIndex(index);
@@ -57,7 +60,10 @@ class Game {
     }.bind(this);
   }
 
-  // Sell entire tile
+  ////////////////////////
+  /// Sell entire tile ///
+  ////////////////////////
+
   onTileDoubleClick(board, index) {
     return function (event, elem) {
       let tile = board.getTileByIndex(index);
@@ -74,7 +80,10 @@ class Game {
     }.bind(this);
   }
 
-  // Upgrade tile
+  ////////////////////////
+  /// Upgrade tile ///////
+  ////////////////////////
+
   onTileTripleClick(board, index) {
     return function (event, elem) {
       let tile = board.getTileByIndex(index);
@@ -145,6 +154,10 @@ class Game {
       button.prop("disabled", false);
     }
   }
+
+  ////////////////////////
+  /// Other //////////////
+  ////////////////////////
 
   clock() {
     this.tick();
